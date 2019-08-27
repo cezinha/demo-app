@@ -1,0 +1,40 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react", "react-native", "react-hooks"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "no-console": 0,
+    "react-native/no-color-literals": "off",
+    "react-native/no-inline-styles": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "globals": {
+    "fetch": true,
+    "__DEV__": true,
+    "window": true,
+    "setTimeout": true,
+    "alert": true,
+    "require": true,
+    "Promise": true,
+    "Expo": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}

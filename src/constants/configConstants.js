@@ -1,0 +1,5 @@
+export const configConstants = {
+  STARTED: 'CONFIG_STARTED',
+  COMPLETED: 'CONFIG_COMPLETED',
+  ERROR: 'CONFIG_ERROR'
+}

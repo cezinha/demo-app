@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import styles from "../../styles/App.scss";
 
 export default class Home extends Component {
   constructor(props) {
@@ -41,20 +42,20 @@ export default class Home extends Component {
           title="Load Config"
           color="#841584"
         />
-        <View style={{ marginBottom: 10, marginTop: 10 }}>
-          <Text style={{ color: "blue", fontSize: 20 }}>{this.props.config.welcome}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.welcome}>{this.props.config.welcome}</Text>
         </View>
-        <View style={{ marginBottom: 10, marginTop: 10 }}>
+        <View style={styles.textContainer}>
           <Text>Message: {this.state.message}</Text>
         </View>
-        <View style={{ marginBottom: 10, marginTop: 10 }}>
+        <View style={styles.textContainer}>
           <Text>Config: {JSON.stringify(this.props.config)}</Text>
         </View>
       </View>
     );
   }
 }
-
+/*
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -62,4 +63,4 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-});
+});*/

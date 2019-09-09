@@ -1,12 +1,16 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["react", "react-native", "react-hooks"],
+  "plugins": ["react", "react-native", "react-hooks", "jest", "css-modules"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-native/all"
+    "plugin:react-native/all",
+    "plugin:jest/recommended",
+    "plugin:css-modules/recommended"
   ],
   "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2017,
     "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
@@ -17,7 +21,12 @@
     "react-native/no-color-literals": "off",
     "react-native/no-inline-styles": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
   },
   "globals": {
     "fetch": true,
@@ -36,5 +45,8 @@
     "import/resolver": {
       "babel-module": {}
     }
+  },
+  "env": {
+    "jest/globals": true
   }
 }

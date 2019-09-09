@@ -29,6 +29,9 @@
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "scss", "sass"]
+    },
+    "android": {
+      "package": "br.com.cezinha.demoapp"
     }
   }
 }

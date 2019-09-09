@@ -1,7 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import styles from "../../styles/App.scss";
+import { Text, View, Button, Alert, AsyncStorage } from 'react-native';
+import styles from "./style.scss";
+import * as BackgroundFetch from 'expo-background-fetch';
+import * as TaskManager from 'expo-task-manager';
+import config from '../../config/config.env';
+
+BackgroundFetch.setMinimumIntervalAsync(15);
+const TASK_NAME = 'test-background-fetch';
+TaskManager.defineTask(TASK_NAME, async() => {
+  try {
+    let response = await fetch(`${config.BG_URL}`);
+    let data = await response.json();
+    await AsyncStorage.setItem('CONFIG_ASYNC', JSON.stringify(data));
+  } catch(error) {
+    Alert.alert(`Error ${String(error)}`);
+  }
+});
 
 export default class Home extends Component {
   constructor(props) {
@@ -25,8 +40,52 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.setState({ message: "Loading"});
+    this.registerTaskAsync();
 
     this.loadConfig();
+  }
+
+  async getItem() {
+    try {
+      const data = await AsyncStorage.getItem("CONFIG_ASYNC");
+
+      Alert.alert(data);
+    } catch (error) {
+      Alert.alert('no data');
+    }
+  }
+
+  async registerTaskAsync() {
+    await BackgroundFetch.registerTaskAsync(TASK_NAME);
+    console.log('task registered');
+
+    const status = await BackgroundFetch.getStatusAsync();
+
+    switch(status) {
+      case BackgroundFetch.Status.Restricted:
+        Alert.alert('Restrict');
+        break;
+      case BackgroundFetch.Status.Denied:
+        Alert.alert('Background execution is disabled');
+        break;
+      default:
+        Alert.alert('Background execution allowed');
+
+        let tasks = await TaskManager.getRegisteredTasksAsync();
+        if (tasks.find(f => f.taskName === TASK_NAME) == null) {
+          Alert.alert('Registering task');
+          await BackgroundFetch.registerTaskAsync(TASK_NAME);
+
+          tasks = await TaskManager.getRegisteredTasksAsync();
+          Alert.alert('Checking ', tasks);
+        } else {
+          Alert.alert(`Task ${TASK_NAME} already registered, skipping`);
+        }
+
+        await BackgroundFetch.setMinimumIntervalAsync(15);
+
+        break;
+    }
   }
   render() {
     const onPressLoadConfig = () => {
@@ -34,13 +93,12 @@ export default class Home extends Component {
 
       this.loadConfig();
     }
-
     return (
       <View style={styles.container}>
         <Button
           onPress={onPressLoadConfig}
           title="Load Config"
-          color="#841584"
+          color={styles.welcome.color}
         />
         <View style={styles.textContainer}>
           <Text style={styles.welcome}>{this.props.config.welcome}</Text>
@@ -55,12 +113,3 @@ export default class Home extends Component {
     );
   }
 }
-/*
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});*/

@@ -1,11 +1,13 @@
+@import 'color';
+
 .container {
     align-items: center;
-    background-color: #fff;
+    background-color: $WHITE;
     justify-content: center;
     flex: 1;
 }
 .welcome {
-    color: #00ff00;
+    color: $LIGHT_BLUE_800;
     font-size: 20px;
 }
 .textContainer {

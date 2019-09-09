@@ -1,6 +1,7 @@
 export default {
   API_URL: "https://staging.partyou.com.br",
-  REMOTE_CONFIG_URL: "http://192.168.0.143:3000/config.json",
-  welcome: "Hello World! Ohayo 4!",
-  updated: 1564513016343
+  REMOTE_CONFIG_URL: "http://192.168.1.67:3000/config.json",
+  BG_URL: "http://192.168.1.67:3000/bg.json",
+  welcome: "Background Testing",
+  updated: 1568037412895
 }

@@ -1,8 +1,10 @@
 import React from 'react';
-import { AppLoading, Asset, Font } from 'expo';
+import { AppLoading } from 'expo';
 import { Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Home from './Home';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
 
 function cacheImages(images) {
   return images.map(image => {

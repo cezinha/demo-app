@@ -5,6 +5,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import Home from './Home';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
+import { SQLite } from 'expo-sqlite';
+
+const db = SQLite.openDatabase("demo.db");
 
 function cacheImages(images) {
   return images.map(image => {
@@ -34,6 +37,26 @@ export default class AppContainer extends React.Component {
     const fontAssets = cacheFonts([FontAwesome.font]);
 
     await Promise.all([...imageAssets, ...fontAssets]);
+  }
+
+  componentDidMount() {
+    db.transaction(tx => {
+      tx.executeSql(
+        "create table if not exists config (id integer primary key not null, param text, value text);"
+      );
+    });
+  }
+
+  update() {
+    db.transaction(tx => {
+      tx.executeSql(
+        `select * from config`,
+        [],
+        (_, { rows: { _array }}) => {
+          this.setState({ config: _array });
+        }
+      );
+    });
   }
 
   render() {

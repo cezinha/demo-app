@@ -9,8 +9,8 @@
     "plugin:css-modules/recommended"
   ],
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2017,
+    /*"sourceType": "module",
+    "ecmaVersion": 2017,*/
     "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
@@ -47,6 +47,7 @@
     }
   },
   "env": {
-    "jest/globals": true
+    "jest/globals": true,
+    "react-native/react-native": true
   }
 }

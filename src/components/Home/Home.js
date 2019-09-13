@@ -57,9 +57,8 @@ export default class Home extends Component {
 
   async registerTaskAsync() {
     await BackgroundFetch.registerTaskAsync(TASK_NAME);
-    console.log('task registered');
-
     const status = await BackgroundFetch.getStatusAsync();
+    let tasks;
 
     switch(status) {
       case BackgroundFetch.Status.Restricted:
@@ -71,7 +70,7 @@ export default class Home extends Component {
       default:
         Alert.alert('Background execution allowed');
 
-        let tasks = await TaskManager.getRegisteredTasksAsync();
+        tasks = await TaskManager.getRegisteredTasksAsync();
         if (tasks.find(f => f.taskName === TASK_NAME) == null) {
           Alert.alert('Registering task');
           await BackgroundFetch.registerTaskAsync(TASK_NAME);

@@ -1,4 +1,4 @@
-import { configConstants } from  '../constants';
+import {configConstants} from  '../constants';
 import { REHYDRATE } from 'redux-persist';
 import initConfig from '../config/config.env';
 

@@ -35,7 +35,9 @@ export default class Home extends Component {
 
   static propTypes = {
     configLoad: PropTypes.func.isRequired,
-    config: PropTypes.object
+    config: PropTypes.object,
+    netInfo: PropTypes.object,
+    getInfo: PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -43,6 +45,7 @@ export default class Home extends Component {
     this.registerTaskAsync();
 
     this.loadConfig();
+    this.props.getInfo();
   }
 
   async getItem() {
@@ -62,24 +65,24 @@ export default class Home extends Component {
 
     switch(status) {
       case BackgroundFetch.Status.Restricted:
-        Alert.alert('Restrict');
+        //Alert.alert('Restrict');
         break;
       case BackgroundFetch.Status.Denied:
-        Alert.alert('Background execution is disabled');
+        //Alert.alert('Background execution is disabled');
         break;
       default:
-        Alert.alert('Background execution allowed');
+        //Alert.alert('Background execution allowed');
 
         tasks = await TaskManager.getRegisteredTasksAsync();
         if (tasks.find(f => f.taskName === TASK_NAME) == null) {
-          Alert.alert('Registering task');
+          //Alert.alert('Registering task');
           await BackgroundFetch.registerTaskAsync(TASK_NAME);
 
           tasks = await TaskManager.getRegisteredTasksAsync();
-          Alert.alert('Checking ', tasks);
-        } else {
-          Alert.alert(`Task ${TASK_NAME} already registered, skipping`);
-        }
+          //Alert.alert('Checking ', tasks);
+        }// else {
+          //Alert.alert(`Task ${TASK_NAME} already registered, skipping`);
+        //}
 
         await BackgroundFetch.setMinimumIntervalAsync(15);
 

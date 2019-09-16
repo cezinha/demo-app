@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import { persistCombineReducers, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { AsyncStorage } from 'react-native';
 import { createLogger } from "redux-logger";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
@@ -18,7 +18,7 @@ if (__DEV__) {
 
 const config = {
   key: "root",
-  storage
+  storage: AsyncStorage
 };
 
 const reducer = persistCombineReducers(config, reducers);

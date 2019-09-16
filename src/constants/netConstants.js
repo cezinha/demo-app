@@ -1,0 +1,5 @@
+export const netConstants = {
+  NET_STARTED: 'NETINFO_STARTED',
+  NET_COMPLETED: 'NETINFO_COMPLETED',
+  NET_ERROR: 'NETINFO_ERROR'
+}

@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
-import { configLoad } from '../../actions';
+import { configLoad, getInfo } from '../../actions';
 import Home from './Home';
 
 const mapStateToProps = state => {
   return {
-    config: state.configReducer.config
+    config: state.configReducer.config,
+    netInfo: state.netReducer
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    configLoad: (config) => dispatch(configLoad(config))
+    configLoad: (config) => dispatch(configLoad(config)),
+    getInfo: () => dispatch(getInfo())
   };
 };
 

@@ -5,7 +5,7 @@ import { reactotronRedux } from 'reactotron-redux'
 const reactotron = Reactotron
   .configure({
     name: 'React Native Demo',
-    host: '192.168.1.67'
+    host: '192.168.0.143'
   })
   .use(reactotronRedux()) //  <- here i am!
   .connect(); //Don't forget about me!

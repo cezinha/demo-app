@@ -43,11 +43,8 @@ export default class Home extends Component {
   componentDidMount() {
     this.setState({ message: "Loading"});
     this.registerTaskAsync();
-
     this.loadConfig();
-    this.props.getInfo();
   }
-
   async getItem() {
     try {
       const data = await AsyncStorage.getItem("CONFIG_ASYNC");

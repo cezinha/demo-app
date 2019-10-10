@@ -2,7 +2,7 @@ import {netConstants} from  '../constants';
 import { REHYDRATE } from 'redux-persist';
 
 const initialState = {
-  netInfo: {},
+  netInfo: { isConnected: false },
   loading: false,
   error: ''
 }
@@ -12,7 +12,7 @@ const netReducer = (state = initialState, action) => {
     case REHYDRATE:
       return state;
     case netConstants.NET_STARTED:
-      return { ...state, loading: true };
+      return { ...initialState, loading: true };
     case netConstants.NET_COMPLETED:
       return { ...state, loading: false, netInfo: action.netInfo };
     case netConstants.NET_ERROR:

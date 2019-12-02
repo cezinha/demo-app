@@ -5,6 +5,7 @@ import styles from "./style.scss";
 import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 import config from '../../config/config.env';
+import { Camera } from 'expo-camera';
 
 BackgroundFetch.setMinimumIntervalAsync(15);
 const TASK_NAME = 'test-background-fetch';
@@ -23,7 +24,8 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      message: ""
+      message: "",
+      light: Camera.Constants.FlashMode.torch
     };
   }
 
